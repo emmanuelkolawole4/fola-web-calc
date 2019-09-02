@@ -7,17 +7,17 @@
     <title>Fola-Web-Calulator</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body onload="calculatorOff()">
         <div class="name">
                 <h4>Fola Web Calc</h4>
             </div>
     <div class="calculator-grid">
         
-        <div class="output">
+        <div data-output class="output">
             <div data-previous-operand class="previous-operand"></div>
             <div data-current-operand class="current-operand"></div>
         </div>
-        <button data-on>OFF</button>
+        <button data-on></button>
         <button data-delete>BS</button>
         <button data-clear>C</button>
         <button data-operation>+</button>

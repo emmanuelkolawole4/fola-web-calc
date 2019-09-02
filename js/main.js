@@ -1,17 +1,44 @@
+function calculatorOff() {
+    calculatorOnOffButton.innerText = 'ON';
+    outputArea.style.background = 'black';
+    this.currentOperand = 0;
+    this.previousOperand = '';
+    this.operation = undefined; 
+}
+
 class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement) {
         this.previousOperandTextElement = previousOperandTextElement;
         this.currentOperandTextElement = currentOperandTextElement;
+        // this.toggleCalculatorOn();
         this.clear();
     }
+
+    toggleCalculatorOn() {
+
+        // switch(outputArea.style.background) {
+        //     case 'black':
+        //         outputArea.style.background = 'gold';  
+        //         break;
+        //     case 
+        // }
+        if (calculatorOnOffButton.innerText === 'ON' && outputArea.style.background === 'black') {
+            outputArea.style.background = 'gold';
+            calculatorOnOffButton.innerText = 'OFF';
+        } else if (calculatorOnOffButton.innerText === 'OFF' && outputArea.style.background === 'gold') {
+            outputArea.style.background = 'black';
+            calculatorOnOffButton.innerText = 'ON';
+        }
+    }
+
     clear() {
-        this.currentOperand = '';
+        this.currentOperand = 0;
         this.previousOperand = '';
         this.operation = undefined;
     }
 
     delete() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1)
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
     appendNumber(number) {
@@ -86,7 +113,7 @@ class Calculator {
 
 
 
-const onCalculator = document.querySelector('[data-on]');
+const calculatorOnOffButton = document.querySelector('[data-on]');
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalsButton = document.querySelector('[data-equals]');
@@ -94,13 +121,20 @@ const deleteButton = document.querySelector('[data-delete]');
 const clearButton = document.querySelector('[data-clear]');
 const previousOperandTextElement = document.querySelector('[data-previous-operand]');
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
+const outputArea = document.querySelector('[data-output]');
 
 
-onCalculator.addEventListener('click', function() {
-    onCalculator.textContent = 'ON';
+
+// switch(onCalculator.textContent) {
+//     case 'OFF':
+
+// }
+
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+
+calculatorOnOffButton.addEventListener('click', () => {
+    calculator.toggleCalculatorOn();
 })
-
-const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -130,3 +164,4 @@ deleteButton.addEventListener('click', button => {
     calculator.delete();
     calculator.updateDisplay();
 })
+
